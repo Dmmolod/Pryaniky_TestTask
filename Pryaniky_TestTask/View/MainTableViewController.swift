@@ -48,6 +48,14 @@ final class MainTableViewController: UIViewController {
         viewModel.modelIsUpdateCallBack = { [weak self] in
             self?.tableView.reloadData()
         }
+        
+        viewModel.showAlertCallBack = { [weak self] alertText in
+            let alertVC = UIAlertController(title: "", message: alertText, preferredStyle: .alert)
+            alertVC.addAction(UIAlertAction(title: "Done", style: .cancel, handler: { _ in
+                alertVC.dismiss(animated: true)
+            }))
+            self?.present(alertVC, animated: true)
+        }
     }
 }
 

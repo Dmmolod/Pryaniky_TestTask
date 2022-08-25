@@ -12,6 +12,8 @@ final class MainTableViewModel: MainTableViewModelProtocol {
     private var networkService: NetworkServiceProtocol
     private var model: PryanikiResponse?
     
+    var showAlertCallBack: ((String) -> Void)?
+    
     var modelIsUpdateCallBack: (() -> Void )? {
         didSet { fetchModel() }
     }
@@ -55,14 +57,17 @@ final class MainTableViewModel: MainTableViewModelProtocol {
               let startIndex = responseTypeData.selectedId,
               let variants = responseTypeData.variants else { return nil}
         
-        return SelectorTableCellViewModel(startIndex, variants)
+        let viewModel = SelectorTableCellViewModel(startIndex, variants)
+        viewModel.delegate = self
+        return viewModel
     }
     
     func didTapRow(at indexPath: IndexPath) {
         guard let views = model?.view,
               indexPath.row < views.count,
               let responseType = model?.data?.first(where: { $0.name == views[indexPath.row] }) else { return }
-        print(responseType.name!)
+        
+        if let alertText = responseType.name { showAlertCallBack?(alertText) }
     }
     
     private func fetchModel() {
@@ -83,5 +88,11 @@ final class MainTableViewModel: MainTableViewModelProtocol {
         
         return model?.data?.first(where: { $0.name == views[indexPath.row] })?.data
     }
+}
+
+extension MainTableViewModel: SelectorTableCellViewModelDelegate {
     
+    func selectorTableCellViewModelDidChange(selectId: Int, text: String) {
+        showAlertCallBack?(String(selectId) + " " + text)
+    }
 }

@@ -7,7 +7,13 @@
 
 import Foundation
 
+protocol SelectorTableCellViewModelDelegate: AnyObject {
+    func selectorTableCellViewModelDidChange(selectId: Int, text: String)
+}
+
 final class SelectorTableCellViewModel: SelectorTableCellViewModelProtocol {
+    
+    weak var delegate: SelectorTableCellViewModelDelegate?
     
     var variantsIsUpdateCallBack: (([Variant]) -> Void)? {
         didSet { configureVariants() }
@@ -34,8 +40,9 @@ final class SelectorTableCellViewModel: SelectorTableCellViewModelProtocol {
     
     func segmentIsSelected(at segmentId: Int) {
         guard segmentId < variants.count else { return }
-        text = variants[segmentId].text
-        
+        let selector = variants[segmentId]
+        text = selector.text
+        delegate?.selectorTableCellViewModelDidChange(selectId: selector.id + 1, text: selector.text)
     }
         
     private func configureVariants() {

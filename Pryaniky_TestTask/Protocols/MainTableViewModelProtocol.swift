@@ -9,6 +9,7 @@ import Foundation
 
 protocol MainTableViewModelProtocol {
     var modelIsUpdateCallBack: (() -> Void )? { get set }
+    var showAlertCallBack: ((String) -> Void)? { get set }
 
     func rowCount(in section: Int) -> Int
     func cellTypeForRow(at indexPath: IndexPath) -> MainTableCellType?

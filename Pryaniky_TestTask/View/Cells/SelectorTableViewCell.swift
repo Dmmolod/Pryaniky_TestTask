@@ -11,7 +11,7 @@ import UIKit
 final class SelectorTableViewCell: UITableViewCell {
     
     var viewModel: SelectorTableCellViewModelProtocol?
-    
+        
     private let segmentedControll = UISegmentedControl()
     private let segmentTextLabel = UILabel()
     
