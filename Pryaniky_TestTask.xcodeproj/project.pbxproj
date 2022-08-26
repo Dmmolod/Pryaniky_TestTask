@@ -27,7 +27,6 @@
 		D9B5232828B7CF8800501D7E /* MainTableViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9B5232728B7CF8800501D7E /* MainTableViewModelProtocol.swift */; };
 		D9B5232C28B7D1D000501D7E /* ImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9B5232B28B7D1D000501D7E /* ImageService.swift */; };
 		D9B5232E28B7E86200501D7E /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9B5232D28B7E86200501D7E /* Model.swift */; };
-		D9B5233028B7F71700501D7E /* MainTableCellType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9B5232F28B7F71700501D7E /* MainTableCellType.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,7 +52,6 @@
 		D9B5232728B7CF8800501D7E /* MainTableViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewModelProtocol.swift; sourceTree = "<group>"; };
 		D9B5232B28B7D1D000501D7E /* ImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageService.swift; sourceTree = "<group>"; };
 		D9B5232D28B7E86200501D7E /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
-		D9B5232F28B7F71700501D7E /* MainTableCellType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableCellType.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -166,7 +164,6 @@
 			isa = PBXGroup;
 			children = (
 				D9B5232D28B7E86200501D7E /* Model.swift */,
-				D9B5232F28B7F71700501D7E /* MainTableCellType.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -283,7 +280,6 @@
 				D9B5231B28B7CE5F00501D7E /* TextTableCellViewModel.swift in Sources */,
 				D9B5230E28B7982F00501D7E /* MainTableViewModel.swift in Sources */,
 				D9B5232C28B7D1D000501D7E /* ImageService.swift in Sources */,
-				D9B5233028B7F71700501D7E /* MainTableCellType.swift in Sources */,
 				D9B5232628B7CF6100501D7E /* TextTableCellViewModelProtocol.swift in Sources */,
 				D9B5232428B7CF5100501D7E /* SelectorTableCellViewModelProtocol.swift in Sources */,
 				D9B5230928B7941B00501D7E /* PictureTableViewCell.swift in Sources */,

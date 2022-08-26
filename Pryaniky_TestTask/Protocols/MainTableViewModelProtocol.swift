@@ -12,7 +12,7 @@ protocol MainTableViewModelProtocol {
     var showAlertCallBack: ((String) -> Void)? { get set }
 
     func rowCount(in section: Int) -> Int
-    func cellTypeForRow(at indexPath: IndexPath) -> MainTableCellType?
+    func cellTypeForRow(at indexPath: IndexPath) -> ResponseData
     func viewModelForPictureCell(at indexPath: IndexPath) -> PictureTableCellViewModelProtocol?
     func viewModelForTextCell(at indexPath: IndexPath) -> TextTableCellViewModelProtocol?
     func viewModelForSelectorCell(at indexPath: IndexPath) -> SelectorTableCellViewModelProtocol?

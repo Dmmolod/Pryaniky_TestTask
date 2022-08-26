@@ -8,7 +8,7 @@
 import Foundation
 
 protocol NetworkServiceProtocol {
-    func fetch(completion: @escaping (Result<PryanikiResponse, Error>) -> Void)
+    func fetch(completion: @escaping (Result<ServerResponse, Error>) -> Void)
 }
 
 final class NetworkService: NetworkServiceProtocol {
@@ -23,7 +23,7 @@ final class NetworkService: NetworkServiceProtocol {
         case failedToGetData
     }
     
-    func fetch(completion: @escaping (Result<PryanikiResponse, Error>) -> Void) {
+    func fetch(completion: @escaping (Result<ServerResponse, Error>) -> Void) {
         guard let url = URL(string: Constants.baseURL) else { DispatchQueue.main.async { completion(.failure(NetworkServiceError.failedToGetURL)) } ;return }
         
         URLSession.shared.dataTask(with: url) { data, _, error in
@@ -32,8 +32,8 @@ final class NetworkService: NetworkServiceProtocol {
                 return
             }
             
-            if let prynikiResponse = try? JSONDecoder().decode(PryanikiResponse.self, from: data) {
-                DispatchQueue.main.async { completion(.success(prynikiResponse)) }
+            if let serverResponse = try? JSONDecoder().decode(ServerResponse.self, from: data) {
+                DispatchQueue.main.async { completion(.success(serverResponse)) }
             } else { DispatchQueue.main.async { completion(.failure(NetworkServiceError.failedToParseData))} }
         }.resume()
     }

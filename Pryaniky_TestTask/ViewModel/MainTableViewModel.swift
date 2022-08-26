@@ -10,7 +10,7 @@ import Foundation
 final class MainTableViewModel: MainTableViewModelProtocol {
 
     private var networkService: NetworkServiceProtocol
-    private var model: PryanikiResponse?
+    private var model: ServerResponse?
     
     var showAlertCallBack: ((String) -> Void)?
     
@@ -23,51 +23,46 @@ final class MainTableViewModel: MainTableViewModelProtocol {
     }
     
     func rowCount(in section: Int) -> Int {
-        model?.view?.count ?? 0
+        model?.view.count ?? 0
     }
     
-    func cellTypeForRow(at indexPath: IndexPath) -> MainTableCellType? {
-
-        guard let responseTypeData = getResponseTypeData(at: indexPath) else { return nil }
-
-        if responseTypeData.text == nil { return .selector }
-        if responseTypeData.text != nil, responseTypeData.url != nil { return .picture }
-        if responseTypeData.text != nil, responseTypeData.url == nil { return .unknown }
-
-        return nil
+    func cellTypeForRow(at indexPath: IndexPath) -> ResponseData {
+        getResponseData(at: indexPath) ?? .unknown
     }
     
     func viewModelForPictureCell(at indexPath: IndexPath) -> PictureTableCellViewModelProtocol? {
-        guard let responseTypeData = getResponseTypeData(at: indexPath),
-              let text = responseTypeData.text, let urlString = responseTypeData.url else { return nil }
+        guard case .picture(let pictureBlock) = getResponseData(at: indexPath) else { return nil }
         
         let imageService = ImageService()
-        return PictureTableCellViewModel(with: imageService, text: text, pictureURLString: urlString)
+        return PictureTableCellViewModel(with: imageService, text: pictureBlock.data.text, pictureURLString: pictureBlock.data.url)
     }
     
     func viewModelForTextCell(at indexPath: IndexPath) -> TextTableCellViewModelProtocol? {
-        guard let responseTypeData = getResponseTypeData(at: indexPath),
-              let text = responseTypeData.text else { return nil }
+        guard case .hz(let textBlock) = getResponseData(at: indexPath) else { return nil }
 
-        return TextTableCellViewModel(with: text)
+        return TextTableCellViewModel(with: textBlock.data.text)
     }
     
     func viewModelForSelectorCell(at indexPath: IndexPath) -> SelectorTableCellViewModelProtocol? {
-        guard let responseTypeData = getResponseTypeData(at: indexPath),
-              let startIndex = responseTypeData.selectedId,
-              let variants = responseTypeData.variants else { return nil}
+        guard case .selector(let selectorBlock) = getResponseData(at: indexPath) else { return nil }
         
-        let viewModel = SelectorTableCellViewModel(startIndex, variants)
+        let viewModel = SelectorTableCellViewModel(selectorBlock.data.selectedId, selectorBlock.data.variants)
         viewModel.delegate = self
         return viewModel
     }
     
     func didTapRow(at indexPath: IndexPath) {
-        guard let views = model?.view,
-              indexPath.row < views.count,
-              let responseType = model?.data?.first(where: { $0.name == views[indexPath.row] }) else { return }
+        guard let responseData = getResponseData(at: indexPath) else { return }
+        let typeText: String
         
-        if let alertText = responseType.name { showAlertCallBack?(alertText) }
+        switch responseData {
+        case .picture(let pictureBlock): typeText = pictureBlock.name
+        case .selector(let selectorBlock): typeText = selectorBlock.name
+        case .hz(let textBlock): typeText = textBlock.name
+        case .unknown: return
+        }
+        
+        showAlertCallBack?(typeText)
     }
     
     private func fetchModel() {
@@ -81,17 +76,17 @@ final class MainTableViewModel: MainTableViewModelProtocol {
         }
     }
     
-    private func getResponseTypeData(at indexPath: IndexPath) -> SomeData? {
-        guard let views = model?.view,
-              indexPath.row < views.count else { return nil }
-        
-        return model?.data?.first(where: { $0.name == views[indexPath.row] })?.data
+    private func getResponseData(at indexPath: IndexPath) -> ResponseData? {
+        guard let model = model, model.view.count > indexPath.row else { return nil }
+        let type = ResponseDataType(rawValue: model.view[indexPath.row])
+        let responseData = model.data.first(where: { $0.type == type })
+        return responseData
     }
 }
 
 extension MainTableViewModel: SelectorTableCellViewModelDelegate {
     
     func selectorTableCellViewModelDidChange(selectId: Int, text: String) {
-        showAlertCallBack?(String(selectId) + " " + text)
+        showAlertCallBack?("\(ResponseDataType.selector.rawValue): id(\(String(selectId))) - \(text)")
     }
 }

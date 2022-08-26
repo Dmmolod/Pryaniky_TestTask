@@ -77,7 +77,7 @@ extension MainTableViewController: UITableViewDelegate, UITableViewDataSource {
             tempCell?.bind()
             cell = tempCell
             
-        case .unknown:
+        case .hz:
             let tempCell = tableView.dequeueReusableCell(withIdentifier: TextTableViewCell.identifier,
                                                          for: indexPath) as? TextTableViewCell
 
@@ -93,13 +93,13 @@ extension MainTableViewController: UITableViewDelegate, UITableViewDataSource {
             
         default: break
         }
-        
+
         return cell ?? UITableViewCell()
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch viewModel.cellTypeForRow(at: indexPath) {
-        case .unknown: return tableView.estimatedRowHeight
+        case .hz: return tableView.estimatedRowHeight
         case .selector: return 100
         case .picture: return 200
         default: return 0
