@@ -13,7 +13,11 @@ final class SelectorTableViewCell: UITableViewCell {
     var viewModel: SelectorTableCellViewModelProtocol?
         
     private let segmentedControll = UISegmentedControl()
-    private let segmentTextLabel = UILabel()
+    private let segmentTextLabel: UILabel = {
+        let label = UILabel()
+         label.textColor = .label
+         return label
+     }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)

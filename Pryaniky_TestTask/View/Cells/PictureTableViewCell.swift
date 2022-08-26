@@ -17,7 +17,11 @@ final class PictureTableViewCell: UITableViewCell {
         imageView.contentMode = .scaleToFill
         return imageView
     }()
-    private let textLable = UILabel()
+    private let textLable: UILabel = {
+       let label = UILabel()
+        label.textColor = .label
+        return label
+    }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)

@@ -15,6 +15,7 @@ final class TextTableViewCell: UITableViewCell {
     private var textLable: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
+        label.textColor = .label
         return label
     }()
     

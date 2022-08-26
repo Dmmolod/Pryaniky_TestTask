@@ -76,7 +76,6 @@ final class MainTableViewModel: MainTableViewModelProtocol {
             case .success(let model):
                 self?.model = model
                 self?.modelIsUpdateCallBack?()
-                print("CALLBACK DONE")
             case .failure(let error): print(error)
             }
         }

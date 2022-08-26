@@ -31,7 +31,8 @@ final class MainTableViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .red
+        
+        tableView.backgroundColor = .systemBackground
         
         view.addSubview(tableView)
         
