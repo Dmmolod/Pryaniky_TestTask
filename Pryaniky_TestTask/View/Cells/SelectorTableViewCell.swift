@@ -28,14 +28,13 @@ final class SelectorTableViewCell: UITableViewCell {
     
     func bind() {
         viewModel?.variantsIsUpdateCallBack = { [weak self] variants in
-            variants.forEach {
-                let index = $0.id
+            for (index, variant) in variants.enumerated() {
                 
                 self?.segmentedControll.insertSegment(action: UIAction { _ in
                     self?.viewModel?.segmentIsSelected(at: index)
-                }, at: $0.id, animated: true)
+                }, at: index, animated: true)
                 
-                self?.segmentedControll.setTitle("\($0.id+1)", forSegmentAt: index)
+                self?.segmentedControll.setTitle("\(variant.id)", forSegmentAt: index)
             }
         }
         segmentedControll.selectedSegmentIndex = viewModel?.getStartIndex() ?? 0

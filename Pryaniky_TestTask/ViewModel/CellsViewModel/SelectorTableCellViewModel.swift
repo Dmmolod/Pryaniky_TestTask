@@ -16,7 +16,7 @@ final class SelectorTableCellViewModel: SelectorTableCellViewModelProtocol {
     weak var delegate: SelectorTableCellViewModelDelegate?
     
     var variantsIsUpdateCallBack: (([Variant]) -> Void)? {
-        didSet { configureVariants() }
+        didSet { variantsIsUpdateCallBack?(variants) }
     }
     var textIsUpdateCallBack: ((String) -> Void)? {
         didSet { textIsUpdateCallBack?(text) }
@@ -31,22 +31,20 @@ final class SelectorTableCellViewModel: SelectorTableCellViewModelProtocol {
     init(_ selectedIndex: Int, _ variants: [Variant]) {
         self.selectedIndex = selectedIndex
         self.variants = variants
-        self.text = variants[selectedIndex - 1].text
+        
+        self.text = variants.first(where: { variant in
+            variant.id == selectedIndex
+        })?.text ?? ""
     }
     
     func getStartIndex() -> Int {
-        selectedIndex - 1
+        selectedIndex
     }
     
     func segmentIsSelected(at segmentId: Int) {
         guard segmentId < variants.count else { return }
         let selector = variants[segmentId]
         text = selector.text
-        delegate?.selectorTableCellViewModelDidChange(selectId: selector.id + 1, text: selector.text)
-    }
-        
-    private func configureVariants() {
-        variants = variants.map { Variant(id: $0.id - 1, text: $0.text) }
-        variantsIsUpdateCallBack?(variants)
+        delegate?.selectorTableCellViewModelDidChange(selectId: selector.id, text: selector.text)
     }
 }

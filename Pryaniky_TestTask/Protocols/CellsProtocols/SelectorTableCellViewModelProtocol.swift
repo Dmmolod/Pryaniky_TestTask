@@ -12,5 +12,5 @@ protocol SelectorTableCellViewModelProtocol {
     var textIsUpdateCallBack: ((String) -> Void)? { get set }
     
     func getStartIndex() -> Int
-    func segmentIsSelected(at segmentId: Int) 
+    func segmentIsSelected(at segmentId: Int)
 }

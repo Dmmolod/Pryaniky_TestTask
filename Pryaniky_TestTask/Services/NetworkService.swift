@@ -14,7 +14,7 @@ protocol NetworkServiceProtocol {
 final class NetworkService: NetworkServiceProtocol {
     
     private struct Constants {
-        static let baseURL = "https://pryaniky.com/static/json/sample.json"
+        static let baseURL = "https://chat.pryaniky.com/json/data-custom-selected-id.json"
     }
     
     enum NetworkServiceError: Error {
