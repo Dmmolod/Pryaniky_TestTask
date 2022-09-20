@@ -37,8 +37,10 @@ final class SelectorTableCellViewModel: SelectorTableCellViewModelProtocol {
         })?.text ?? ""
     }
     
-    func getStartIndex() -> Int {
-        selectedIndex
+    func getStartIndex() -> Int? {
+        variants.firstIndex(where:  {
+            $0.id == selectedIndex
+        })
     }
     
     func segmentIsSelected(at segmentId: Int) {
