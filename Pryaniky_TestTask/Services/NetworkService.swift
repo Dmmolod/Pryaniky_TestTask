@@ -8,13 +8,15 @@
 import Foundation
 
 protocol NetworkServiceProtocol {
-    func fetch(completion: @escaping (Result<ServerResponse, Error>) -> Void)
+    func fetch(urlString: String, completion: @escaping (Result<PryanikyServerResponse, Error>) -> Void)
 }
 
 final class NetworkService: NetworkServiceProtocol {
     
-    private struct Constants {
-        static let baseURL = "https://chat.pryaniky.com/json/data-custom-selected-id.json"
+    struct Constants {
+        static let longViewURL = "https://chat.pryaniky.com/json/data-default-order-very-very-long-view.json"
+        static let moreItemsURL = "https://chat.pryaniky.com/json/data-custom-order-much-more-items-in-data.json"
+        static let customData = "https://chat.pryaniky.com/json/data-default-order-custom-data-in-view.json"
     }
     
     enum NetworkServiceError: Error {
@@ -23,8 +25,8 @@ final class NetworkService: NetworkServiceProtocol {
         case failedToGetData
     }
     
-    func fetch(completion: @escaping (Result<ServerResponse, Error>) -> Void) {
-        guard let url = URL(string: Constants.baseURL) else { DispatchQueue.main.async { completion(.failure(NetworkServiceError.failedToGetURL)) } ;return }
+    func fetch(urlString: String, completion: @escaping (Result<PryanikyServerResponse, Error>) -> Void) {
+        guard let url = URL(string: urlString) else { DispatchQueue.main.async { completion(.failure(NetworkServiceError.failedToGetURL)) } ;return }
         
         URLSession.shared.dataTask(with: url) { data, _, error in
             guard let data = data else {
@@ -32,7 +34,7 @@ final class NetworkService: NetworkServiceProtocol {
                 return
             }
             
-            if let serverResponse = try? JSONDecoder().decode(ServerResponse.self, from: data) {
+            if let serverResponse = try? JSONDecoder().decode(PryanikyServerResponse.self, from: data) {
                 DispatchQueue.main.async { completion(.success(serverResponse)) }
             } else { DispatchQueue.main.async { completion(.failure(NetworkServiceError.failedToParseData))} }
         }.resume()

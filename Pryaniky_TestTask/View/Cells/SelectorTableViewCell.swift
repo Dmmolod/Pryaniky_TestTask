@@ -27,17 +27,23 @@ final class SelectorTableViewCell: UITableViewCell {
     required init?(coder: NSCoder) { nil }
     
     func bind() {
-        viewModel?.variantsIsUpdateCallBack = { [weak self] variants in
-            for (index, variant) in variants.enumerated() {
+        
+        viewModel?.updates = { [weak self] variants, selectedId in
+            self?.segmentedControll.removeAllSegments()
+            
+            for (index, variant) in  variants.enumerated() {
+                if index == selectedId { self?.segmentTextLabel.text = variant.text }
                 
                 self?.segmentedControll.insertSegment(action: UIAction { _ in
                     self?.viewModel?.segmentIsSelected(at: index)
-                }, at: index, animated: true)
+                }, at: index, animated: false)
                 
                 self?.segmentedControll.setTitle("\(variant.id)", forSegmentAt: index)
             }
+            if let selectedId {
+                self?.segmentedControll.selectedSegmentIndex = selectedId
+            }
         }
-        segmentedControll.selectedSegmentIndex = viewModel?.getStartIndex() ?? 0
         
         viewModel?.textIsUpdateCallBack = { [weak self] text in
             self?.segmentTextLabel.text = text

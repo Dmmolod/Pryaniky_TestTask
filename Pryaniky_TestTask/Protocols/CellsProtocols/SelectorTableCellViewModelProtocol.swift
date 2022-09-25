@@ -8,8 +8,11 @@
 import Foundation
 
 protocol SelectorTableCellViewModelProtocol {
-    var variantsIsUpdateCallBack: (([Variant]) -> Void)? { get set }
+    
+    var delegate: SelectorTableCellViewModelDelegate? { get set }
+    
     var textIsUpdateCallBack: ((String) -> Void)? { get set }
+    var updates: (([SelectorModel.VariantModel], Int?) -> Void)? { get set }
     
     func getStartIndex() -> Int?
     func segmentIsSelected(at segmentId: Int)

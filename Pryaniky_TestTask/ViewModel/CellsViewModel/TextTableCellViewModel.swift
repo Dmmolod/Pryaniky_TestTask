@@ -13,7 +13,11 @@ final class TextTableCellViewModel: TextTableCellViewModelProtocol {
         didSet { textIsUpdateCallBack?(text) }
     }
     
-    private var text: String
+    private var text: String {
+        didSet {
+            textIsUpdateCallBack?(text)
+        }
+    }
     
     init(with text: String) {
         self.text = text

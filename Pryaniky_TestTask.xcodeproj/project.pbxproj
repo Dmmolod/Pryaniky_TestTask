@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D960413A28E0BB4C00D84B6B /* VideoPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D960413928E0BB4C00D84B6B /* VideoPlayerView.swift */; };
+		D960413C28E0DBF900D84B6B /* AudioTableCellViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D960413B28E0DBF900D84B6B /* AudioTableCellViewModelProtocol.swift */; };
+		D960413E28E0DC2200D84B6B /* VideoTableCellViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D960413D28E0DC2200D84B6B /* VideoTableCellViewModelProtocol.swift */; };
 		D9B522EE28B7876900501D7E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9B522ED28B7876900501D7E /* AppDelegate.swift */; };
 		D9B522F028B7876900501D7E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9B522EF28B7876900501D7E /* SceneDelegate.swift */; };
 		D9B522F228B7876900501D7E /* MainTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9B522F128B7876900501D7E /* MainTableViewController.swift */; };
@@ -27,9 +30,16 @@
 		D9B5232828B7CF8800501D7E /* MainTableViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9B5232728B7CF8800501D7E /* MainTableViewModelProtocol.swift */; };
 		D9B5232C28B7D1D000501D7E /* ImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9B5232B28B7D1D000501D7E /* ImageService.swift */; };
 		D9B5232E28B7E86200501D7E /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9B5232D28B7E86200501D7E /* Model.swift */; };
+		D9C07FD528DF2AEB001D99D7 /* VideoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9C07FD428DF2AEB001D99D7 /* VideoTableViewCell.swift */; };
+		D9C07FD728DF2AF5001D99D7 /* AudioTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9C07FD628DF2AF5001D99D7 /* AudioTableCellView.swift */; };
+		D9C07FDA28DF2B12001D99D7 /* AudioTableCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9C07FD928DF2B12001D99D7 /* AudioTableCellViewModel.swift */; };
+		D9C07FDC28DF2B1C001D99D7 /* VideoTableCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9C07FDB28DF2B1C001D99D7 /* VideoTableCellViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D960413928E0BB4C00D84B6B /* VideoPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerView.swift; sourceTree = "<group>"; };
+		D960413B28E0DBF900D84B6B /* AudioTableCellViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioTableCellViewModelProtocol.swift; sourceTree = "<group>"; };
+		D960413D28E0DC2200D84B6B /* VideoTableCellViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoTableCellViewModelProtocol.swift; sourceTree = "<group>"; };
 		D9B522EA28B7876900501D7E /* Pryaniky_TestTask.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pryaniky_TestTask.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9B522ED28B7876900501D7E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D9B522EF28B7876900501D7E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -52,6 +62,10 @@
 		D9B5232728B7CF8800501D7E /* MainTableViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewModelProtocol.swift; sourceTree = "<group>"; };
 		D9B5232B28B7D1D000501D7E /* ImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageService.swift; sourceTree = "<group>"; };
 		D9B5232D28B7E86200501D7E /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		D9C07FD428DF2AEB001D99D7 /* VideoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoTableViewCell.swift; sourceTree = "<group>"; };
+		D9C07FD628DF2AF5001D99D7 /* AudioTableCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioTableCellView.swift; sourceTree = "<group>"; };
+		D9C07FD928DF2B12001D99D7 /* AudioTableCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioTableCellViewModel.swift; sourceTree = "<group>"; };
+		D9C07FDB28DF2B1C001D99D7 /* VideoTableCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoTableCellViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +125,8 @@
 				D9B5230628B7941300501D7E /* TextTableViewCell.swift */,
 				D9B5230828B7941B00501D7E /* PictureTableViewCell.swift */,
 				D9B5230A28B7942400501D7E /* SelectorTableViewCell.swift */,
+				D9C07FD428DF2AEB001D99D7 /* VideoTableViewCell.swift */,
+				D9C07FD628DF2AF5001D99D7 /* AudioTableCellView.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -156,6 +172,7 @@
 			children = (
 				D9B522F128B7876900501D7E /* MainTableViewController.swift */,
 				D9B5230528B7940000501D7E /* Cells */,
+				D960413928E0BB4C00D84B6B /* VideoPlayerView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -183,6 +200,8 @@
 				D9B5232128B7CF4300501D7E /* PictureTableCellViewModelProtocol.swift */,
 				D9B5232328B7CF5100501D7E /* SelectorTableCellViewModelProtocol.swift */,
 				D9B5232528B7CF6100501D7E /* TextTableCellViewModelProtocol.swift */,
+				D960413B28E0DBF900D84B6B /* AudioTableCellViewModelProtocol.swift */,
+				D960413D28E0DC2200D84B6B /* VideoTableCellViewModelProtocol.swift */,
 			);
 			path = CellsProtocols;
 			sourceTree = "<group>";
@@ -193,6 +212,8 @@
 				D9B5231A28B7CE5F00501D7E /* TextTableCellViewModel.swift */,
 				D9B5231C28B7CE6E00501D7E /* PictureTableCellViewModel.swift */,
 				D9B5231E28B7CEA100501D7E /* SelectorTableCellViewModel.swift */,
+				D9C07FD928DF2B12001D99D7 /* AudioTableCellViewModel.swift */,
+				D9C07FDB28DF2B1C001D99D7 /* VideoTableCellViewModel.swift */,
 			);
 			path = CellsViewModel;
 			sourceTree = "<group>";
@@ -268,23 +289,30 @@
 			buildActionMask = 2147483647;
 			files = (
 				D9B522F228B7876900501D7E /* MainTableViewController.swift in Sources */,
+				D9C07FDA28DF2B12001D99D7 /* AudioTableCellViewModel.swift in Sources */,
 				D9B5231F28B7CEA100501D7E /* SelectorTableCellViewModel.swift in Sources */,
 				D9B5230B28B7942400501D7E /* SelectorTableViewCell.swift in Sources */,
 				D9B522EE28B7876900501D7E /* AppDelegate.swift in Sources */,
 				D9B522F028B7876900501D7E /* SceneDelegate.swift in Sources */,
 				D9B5231128B798DB00501D7E /* NetworkService.swift in Sources */,
 				D9B5231D28B7CE6E00501D7E /* PictureTableCellViewModel.swift in Sources */,
+				D960413C28E0DBF900D84B6B /* AudioTableCellViewModelProtocol.swift in Sources */,
 				D9B5231528B7A18200501D7E /* Extensions.swift in Sources */,
+				D9C07FD528DF2AEB001D99D7 /* VideoTableViewCell.swift in Sources */,
 				D9B5232E28B7E86200501D7E /* Model.swift in Sources */,
 				D9B5232828B7CF8800501D7E /* MainTableViewModelProtocol.swift in Sources */,
 				D9B5231B28B7CE5F00501D7E /* TextTableCellViewModel.swift in Sources */,
+				D9C07FD728DF2AF5001D99D7 /* AudioTableCellView.swift in Sources */,
 				D9B5230E28B7982F00501D7E /* MainTableViewModel.swift in Sources */,
+				D960413E28E0DC2200D84B6B /* VideoTableCellViewModelProtocol.swift in Sources */,
 				D9B5232C28B7D1D000501D7E /* ImageService.swift in Sources */,
 				D9B5232628B7CF6100501D7E /* TextTableCellViewModelProtocol.swift in Sources */,
 				D9B5232428B7CF5100501D7E /* SelectorTableCellViewModelProtocol.swift in Sources */,
 				D9B5230928B7941B00501D7E /* PictureTableViewCell.swift in Sources */,
 				D9B5232228B7CF4300501D7E /* PictureTableCellViewModelProtocol.swift in Sources */,
 				D9B5230728B7941300501D7E /* TextTableViewCell.swift in Sources */,
+				D9C07FDC28DF2B1C001D99D7 /* VideoTableCellViewModel.swift in Sources */,
+				D960413A28E0BB4C00D84B6B /* VideoPlayerView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -15,32 +15,36 @@ final class SelectorTableCellViewModel: SelectorTableCellViewModelProtocol {
     
     weak var delegate: SelectorTableCellViewModelDelegate?
     
-    var variantsIsUpdateCallBack: (([Variant]) -> Void)? {
-        didSet { variantsIsUpdateCallBack?(variants) }
+    var updates: (([SelectorModel.VariantModel], Int?) -> Void)? {
+        didSet {
+            updates?(variants, getStartIndex())
+        }
     }
+    
     var textIsUpdateCallBack: ((String) -> Void)? {
         didSet { textIsUpdateCallBack?(text) }
     }
     
-    private let selectedIndex: Int
-    private var variants: [Variant]
+    private var selectedIndex: Int
+    private var variants: [SelectorModel.VariantModel]
     private var text: String {
         didSet { textIsUpdateCallBack?(text) }
     }
     
-    init(_ selectedIndex: Int, _ variants: [Variant]) {
+    init(_ selectedIndex: Int, _ variants: [SelectorModel.VariantModel]) {
         self.selectedIndex = selectedIndex
         self.variants = variants
-        
-        self.text = variants.first(where: { variant in
-            variant.id == selectedIndex
-        })?.text ?? ""
+        self.text = ""
+        self.updateSelectedText(for: selectedIndex)
     }
     
     func getStartIndex() -> Int? {
-        variants.firstIndex(where:  {
-            $0.id == selectedIndex
-        })
+        variants.firstIndex(where: { $0.id == selectedIndex })
+    }
+    
+    func updateSelectedText(for index: Int) {
+        guard index < variants.count else { return }
+        self.text = variants.first(where: { $0.id == index })?.text ?? ""
     }
     
     func segmentIsSelected(at segmentId: Int) {

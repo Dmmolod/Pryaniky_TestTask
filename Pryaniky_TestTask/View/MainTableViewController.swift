@@ -17,6 +17,8 @@ final class MainTableViewController: UIViewController {
         table.register(TextTableViewCell.self, forCellReuseIdentifier: TextTableViewCell.identifier)
         table.register(PictureTableViewCell.self, forCellReuseIdentifier: PictureTableViewCell.identifier)
         table.register(SelectorTableViewCell.self, forCellReuseIdentifier: SelectorTableViewCell.identifier)
+        table.register(AudioTableCellView.self, forCellReuseIdentifier: AudioTableCellView.identifier)
+        table.register(VideoTableCellView.self, forCellReuseIdentifier: VideoTableCellView.identifier)
         return table
     }()
     
@@ -24,7 +26,6 @@ final class MainTableViewController: UIViewController {
         self.viewModel = viewModel
         
         super.init(nibName: nil, bundle: nil)
-        
         bind()
     }
     required init?(coder: NSCoder) { nil }
@@ -80,7 +81,7 @@ extension MainTableViewController: UITableViewDelegate, UITableViewDataSource {
         case .hz:
             let tempCell = tableView.dequeueReusableCell(withIdentifier: TextTableViewCell.identifier,
                                                          for: indexPath) as? TextTableViewCell
-
+            
             tempCell?.viewModel = viewModel.viewModelForTextCell(at: indexPath)
             tempCell?.bind()
             cell = tempCell
@@ -90,7 +91,18 @@ extension MainTableViewController: UITableViewDelegate, UITableViewDataSource {
             tempCell?.viewModel = viewModel.viewModelForSelectorCell(at: indexPath)
             tempCell?.bind()
             cell = tempCell
-            
+        case .audio:
+            let tempCell = tableView.dequeueReusableCell(withIdentifier: AudioTableCellView.identifier,
+                                                 for: indexPath) as? AudioTableCellView
+            tempCell?.viewModel = viewModel.viewModelForAudioCell(at: indexPath)
+            tempCell?.bind()
+            cell = tempCell
+        case .video:
+            let tempCell = tableView.dequeueReusableCell(withIdentifier: VideoTableCellView.identifier,
+                                                         for: indexPath) as? VideoTableCellView
+            tempCell?.viewModel = viewModel.viewModelForVideoCell(at: indexPath)
+            tempCell?.bind()
+            cell = tempCell
         default: break
         }
 
@@ -102,6 +114,8 @@ extension MainTableViewController: UITableViewDelegate, UITableViewDataSource {
         case .hz: return tableView.estimatedRowHeight
         case .selector: return 100
         case .picture: return 200
+        case .audio: return tableView.estimatedRowHeight
+        case .video: return tableView.estimatedRowHeight
         default: return 0
         }
     }

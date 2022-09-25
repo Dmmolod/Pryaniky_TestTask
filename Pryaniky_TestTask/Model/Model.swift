@@ -7,15 +7,12 @@
 
 import Foundation
 
-struct ServerResponse: Decodable {
-    let data: [ResponseData]
-    let view: [String]
-}
-
 enum ResponseDataType: String, Decodable {
     case picture
     case selector
     case hz
+    case audio
+    case video
     case unknown
     
     init(from decoder: Decoder) throws {
@@ -25,9 +22,11 @@ enum ResponseDataType: String, Decodable {
 }
 
 enum ResponseData: Decodable {
-    case picture(PictureBlock)
-    case selector(SelectorBlock)
-    case hz(TextBlock)
+    case picture(PictureModel)
+    case selector(SelectorModel)
+    case hz(TextModel)
+    case audio(AudioModel)
+    case video(VideoModel)
     case unknown
     
     var type: ResponseDataType {
@@ -35,12 +34,15 @@ enum ResponseData: Decodable {
         case .picture: return .picture
         case .selector: return .selector
         case .hz: return .hz
+        case .audio: return .audio
+        case .video: return .video
         case .unknown: return .unknown
         }
     }
-    
+
     enum CodingKeys: String, CodingKey {
         case name
+        case data
     }
     
     init(from decoder: Decoder) throws {
@@ -50,54 +52,80 @@ enum ResponseData: Decodable {
             self = .unknown
             return
         }
-        
-        let objectContainer = try decoder.singleValueContainer()
-        
+                
         switch type {
         case .picture:
-            let pictureBlock = try objectContainer.decode(PictureBlock.self)
-            self = .picture(pictureBlock)
+            let pictureModel = try container.decode(PictureModel.self, forKey: .data)
+            self = .picture(pictureModel)
         case .selector:
-            let selectorBlock = try objectContainer.decode(SelectorBlock.self)
-            self = .selector(selectorBlock)
+            let selectorModel = try container.decode(SelectorModel.self, forKey: .data)
+            self = .selector(selectorModel)
         case .hz:
-            let textBlock = try objectContainer.decode(TextBlock.self)
-            self = .hz(textBlock)
-        case .unknown: self = .unknown
+            let textModel = try container.decode(TextModel.self, forKey: .data)
+            self = .hz(textModel)
+        case .audio:
+            let audioModel = try container.decode(AudioModel.self, forKey: .data)
+            self = .audio(audioModel)
+        case .video:
+            let videoModel = try container.decode(VideoModel.self, forKey: .data)
+            self = .video(videoModel)
+        case .unknown:
+            self = .unknown
         }
     }
 }
 
-struct Text: Decodable {
+protocol ServerResponseProtocol {
+    var data: [ResponseData] { get }
+    var view: [ResponseDataType] { get }
+}
+
+struct PryanikyServerResponse: Decodable, ServerResponseProtocol {
+    let data: [ResponseData]
+    let view: [ResponseDataType]
+}
+
+struct AudioModel: Codable {
+    let text: String
+    let coverURLString: String
+    let mediaURLString: String
+    
+    enum CodingKeys: String, CodingKey {
+        case text, coverURLString = "coverUrl", mediaURLString = "mediaUrl"
+    }
+}
+
+struct VideoModel: Codable {
+    let text: String
+    let urlString: String
+    let coverURLString: String
+    let mediaURLString: String
+    
+    enum CodingKeys: String, CodingKey {
+        case text, urlString = "url", coverURLString = "coverUrl", mediaURLString = "mediaUrl"
+    }
+}
+
+struct TextModel: Codable {
     let text: String
 }
 
-struct Picture: Decodable {
-    let text: String
-    let url: String
-}
-
-struct Variant: Decodable {
-    var id: Int
-    let text: String
-}
-
-struct Selector: Decodable {
+struct SelectorModel: Codable {
+    
+    struct VariantModel: Codable {
+        let id: Int
+        let text: String
+    }
+    
     let selectedId: Int
-    let variants: [Variant]
+    let variants: [VariantModel]
 }
 
-struct TextBlock: Decodable {
-    let name: String
-    let data: Text
-}
-
-struct PictureBlock: Decodable {
-    let name: String
-    let data: Picture
-}
-
-struct SelectorBlock: Decodable {
-    let name: String
-    let data: Selector
+struct PictureModel: Codable {
+    let urlString: String
+    let text: String
+    
+    enum CodingKeys: String, CodingKey {
+        case urlString = "url", text
+    }
 }
