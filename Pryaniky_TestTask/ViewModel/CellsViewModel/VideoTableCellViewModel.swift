@@ -37,5 +37,4 @@ class VideoTableCellViewModel: VideoTableCellViewModelProtocol {
         videoPlayer?.volume = 0
         videoPlayer?.play()
     }
-    
 }

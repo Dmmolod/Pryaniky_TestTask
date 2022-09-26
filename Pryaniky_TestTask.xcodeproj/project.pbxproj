@@ -10,6 +10,8 @@
 		D960413A28E0BB4C00D84B6B /* VideoPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D960413928E0BB4C00D84B6B /* VideoPlayerView.swift */; };
 		D960413C28E0DBF900D84B6B /* AudioTableCellViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D960413B28E0DBF900D84B6B /* AudioTableCellViewModelProtocol.swift */; };
 		D960413E28E0DC2200D84B6B /* VideoTableCellViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D960413D28E0DC2200D84B6B /* VideoTableCellViewModelProtocol.swift */; };
+		D960414128E17F5600D84B6B /* ImageServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D960414028E17F5600D84B6B /* ImageServiceProtocol.swift */; };
+		D960414328E17F8D00D84B6B /* NetworkServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D960414228E17F8D00D84B6B /* NetworkServiceProtocol.swift */; };
 		D9B522EE28B7876900501D7E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9B522ED28B7876900501D7E /* AppDelegate.swift */; };
 		D9B522F028B7876900501D7E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9B522EF28B7876900501D7E /* SceneDelegate.swift */; };
 		D9B522F228B7876900501D7E /* MainTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9B522F128B7876900501D7E /* MainTableViewController.swift */; };
@@ -40,6 +42,8 @@
 		D960413928E0BB4C00D84B6B /* VideoPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerView.swift; sourceTree = "<group>"; };
 		D960413B28E0DBF900D84B6B /* AudioTableCellViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioTableCellViewModelProtocol.swift; sourceTree = "<group>"; };
 		D960413D28E0DC2200D84B6B /* VideoTableCellViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoTableCellViewModelProtocol.swift; sourceTree = "<group>"; };
+		D960414028E17F5600D84B6B /* ImageServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageServiceProtocol.swift; sourceTree = "<group>"; };
+		D960414228E17F8D00D84B6B /* NetworkServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceProtocol.swift; sourceTree = "<group>"; };
 		D9B522EA28B7876900501D7E /* Pryaniky_TestTask.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pryaniky_TestTask.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9B522ED28B7876900501D7E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D9B522EF28B7876900501D7E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -79,6 +83,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D960413F28E17F3700D84B6B /* ServicesProtocols */ = {
+			isa = PBXGroup;
+			children = (
+				D960414028E17F5600D84B6B /* ImageServiceProtocol.swift */,
+				D960414228E17F8D00D84B6B /* NetworkServiceProtocol.swift */,
+			);
+			path = ServicesProtocols;
+			sourceTree = "<group>";
+		};
 		D9B522E128B7876900501D7E = {
 			isa = PBXGroup;
 			children = (
@@ -171,8 +184,8 @@
 			isa = PBXGroup;
 			children = (
 				D9B522F128B7876900501D7E /* MainTableViewController.swift */,
-				D9B5230528B7940000501D7E /* Cells */,
 				D960413928E0BB4C00D84B6B /* VideoPlayerView.swift */,
+				D9B5230528B7940000501D7E /* Cells */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -189,6 +202,7 @@
 			isa = PBXGroup;
 			children = (
 				D9B5232728B7CF8800501D7E /* MainTableViewModelProtocol.swift */,
+				D960413F28E17F3700D84B6B /* ServicesProtocols */,
 				D9B5232928B7CF8E00501D7E /* CellsProtocols */,
 			);
 			path = Protocols;
@@ -311,8 +325,10 @@
 				D9B5230928B7941B00501D7E /* PictureTableViewCell.swift in Sources */,
 				D9B5232228B7CF4300501D7E /* PictureTableCellViewModelProtocol.swift in Sources */,
 				D9B5230728B7941300501D7E /* TextTableViewCell.swift in Sources */,
+				D960414328E17F8D00D84B6B /* NetworkServiceProtocol.swift in Sources */,
 				D9C07FDC28DF2B1C001D99D7 /* VideoTableCellViewModel.swift in Sources */,
 				D960413A28E0BB4C00D84B6B /* VideoPlayerView.swift in Sources */,
+				D960414128E17F5600D84B6B /* ImageServiceProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

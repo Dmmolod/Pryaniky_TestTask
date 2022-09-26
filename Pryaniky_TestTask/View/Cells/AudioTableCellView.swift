@@ -26,6 +26,10 @@ class AudioTableCellView: UITableViewCell {
     required init?(coder: NSCoder) { nil }
     
     func bind() {
+        viewModel?.audioTextUpdateCallBack = { audioText in
+            self.audioTextLabel.text = audioText
+        }
+        
         viewModel?.coverImageUpdateCallBack = { imageData in
             self.coverImageView.image = UIImage(data: imageData)
         }
@@ -57,6 +61,8 @@ class AudioTableCellView: UITableViewCell {
         coverImageView.image = UIImage(systemName: "waveform")
         coverImageView.contentMode = .scaleAspectFit
         coverImageView.tintColor = .systemPink
+        coverImageView.layer.cornerRadius = 20
+        coverImageView.clipsToBounds = true
         
         playButton.setImage(UIImage(systemName: "play.circle"), for: .normal)
         playButton.tintColor = .systemPink
@@ -80,8 +86,8 @@ class AudioTableCellView: UITableViewCell {
         NSLayoutConstraint.activate([
             coverImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
             coverImageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            coverImageView.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.7),
-            coverImageView.widthAnchor.constraint(equalTo: coverImageView.heightAnchor, multiplier: 0.9),
+            coverImageView.heightAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.8),
+            coverImageView.widthAnchor.constraint(equalTo: coverImageView.heightAnchor, multiplier: 1),
             
             audioTextLabel.topAnchor.constraint(equalTo: coverImageView.bottomAnchor, constant: 10),
             audioTextLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),

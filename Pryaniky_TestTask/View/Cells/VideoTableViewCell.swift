@@ -11,12 +11,7 @@ class VideoTableCellView: UITableViewCell {
     
     var viewModel: VideoTableCellViewModelProtocol?
     
-    private var videoPlayer: AVPlayer?
-    private var mediaURL: URL?
-    private var coverURL: URL?
-    
     private let videoPlayerView = VideoPlayerView()
-    private let coverImageView = UIImageView()
     private let videoTextLabel = UILabel()
     private let spinner = UIActivityIndicatorView(style: .large)
     

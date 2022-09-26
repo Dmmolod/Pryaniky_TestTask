@@ -20,6 +20,7 @@ class AudioTableCellViewModel: AudioTableCellViewModelProtocol {
         didSet { loadCover() }
     }
     
+    private let imageService = ImageService()
     private var audioPlayer: AVAudioPlayer?
     private var audioText: String
     private var audioURL: URL?
@@ -33,7 +34,6 @@ class AudioTableCellViewModel: AudioTableCellViewModelProtocol {
     }
     
     private func updateState() {
-        audioTextUpdateCallBack?(audioText)
         loadPlayer()
         loadCover()
     }
@@ -54,14 +54,17 @@ class AudioTableCellViewModel: AudioTableCellViewModelProtocol {
     }
     
     private func loadCover() {
-        guard let coverURL = coverURL else { return }
+        guard let urlString = coverURL?.absoluteString else { return }
         
-        URLSession.shared.dataTask(with: coverURL) { [weak self] data, _, error in
-            guard let data = data, coverURL == self?.coverURL else { return }
-            DispatchQueue.main.async {
-                self?.coverImageUpdateCallBack?(data)
+        imageService.fetchImage(for: urlString) { result in
+            switch result {
+            case .success(let coverImage):
+                if let imageData = coverImage.pngData() {
+                    self.coverImageUpdateCallBack?(imageData)
+                }
+            case .failure(let failure): print(failure.localizedDescription)
             }
-        }.resume()
+        }
     }
     
     func playButtonPressed() {

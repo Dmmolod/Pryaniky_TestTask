@@ -12,6 +12,7 @@ protocol AudioTableCellViewModelProtocol {
     var spinnerIsActive: ((Bool) -> Void)? { get set }
     var playerIsPlaying: ((Bool) -> Void)? { get set }
     var coverImageUpdateCallBack: ((Data) -> Void)? { get set }
+    var audioTextUpdateCallBack: ((String) -> Void)? { get set }
     
     func playButtonPressed()
 }

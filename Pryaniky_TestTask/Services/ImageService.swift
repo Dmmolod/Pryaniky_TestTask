@@ -8,10 +8,6 @@
 import Foundation
 import UIKit
 
-protocol ImageServiceProtocol {
-    func fetchImage(for urlString: String, completion: @escaping (Result<UIImage, Error>) -> Void)
-}
-
 final class ImageService: ImageServiceProtocol {
     
     enum ImageServiceError: Error {
@@ -23,7 +19,7 @@ final class ImageService: ImageServiceProtocol {
     private let cacheDir = FileManager.default.urls(for: .cachesDirectory, in: .allDomainsMask).first
     
     func fetchImage(for urlString: String, completion: @escaping (Result<UIImage, Error>) -> Void) {
-        if let image = fetchFromCache(path: urlString) { completion(.success(image)); return }
+        if let image = fetchFromCache(urlString: urlString) { completion(.success(image)); return }
         
         loadPicture(for: urlString, completion: { result in
             switch result {
@@ -64,19 +60,21 @@ final class ImageService: ImageServiceProtocol {
         }.resume()
     }
     
-    private func fetchFromCache(path: String) -> UIImage? {
+    private func fetchFromCache(urlString: String) -> UIImage? {
         guard let cacheDir = cacheDir,
-              let imageData = FileManager.default.contents(atPath: cacheDir.appendingPathComponent(path).path),
+              let url = URL(string: urlString),
+              let imageData = FileManager.default.contents(atPath: cacheDir.appendingPathComponent(url.lastPathComponent).path),
               let image = UIImage(data: imageData) else { return nil }
         
         return image
     }
     
-    private func saveToCache(_ image: UIImage, with name: String) {
-        guard let cacheDir = cacheDir else { return }
+    private func saveToCache(_ image: UIImage, with urlString: String) {
+        guard let cacheDir = cacheDir,
+              let url = URL(string: urlString) else { return }
         
         let imageData = image.pngData()
         
-        FileManager.default.createFile(atPath: cacheDir.appendingPathComponent(name).path, contents: imageData)
+        FileManager.default.createFile(atPath: cacheDir.appendingPathComponent(url.lastPathComponent).path, contents: imageData)
     }
 }

@@ -7,10 +7,6 @@
 
 import Foundation
 
-protocol NetworkServiceProtocol {
-    func fetch(urlString: String, completion: @escaping (Result<PryanikyServerResponse, Error>) -> Void)
-}
-
 final class NetworkService: NetworkServiceProtocol {
     
     struct Constants {

@@ -22,8 +22,4 @@ class VideoPlayerView: UIView {
             (layer as? AVPlayerLayer)?.player = newValue
         }
     }
-    
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
-    }
 }

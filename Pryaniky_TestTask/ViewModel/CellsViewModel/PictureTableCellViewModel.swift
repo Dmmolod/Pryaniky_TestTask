@@ -9,9 +9,7 @@ import Foundation
 import UIKit
 
 final class PictureTableCellViewModel: PictureTableCellViewModelProtocol {
-    
-    private var ImageService: ImageServiceProtocol
-    
+        
     var pictureIsUpdateCallBack: ((UIImage?) -> Void)? {
         didSet { updatePicture() }
     }
@@ -19,6 +17,8 @@ final class PictureTableCellViewModel: PictureTableCellViewModelProtocol {
         didSet { textIsUpdateCallBack?(text) }
     }
     
+    private var ImageService: ImageServiceProtocol
+
     private var pricture: UIImage?
     private var pictureURLString: String
     private var text: String
